@@ -25,7 +25,6 @@ export default function HeaderNavigation({
     });
   };
   const mainNavConvert = convertToMenu(mainNav);
-  console.log("🚀 ~ mainNavConvert:", mainNavConvert)
   
   return (
     <HeaderNavigationMobase serviceInfo={serviceInfo} dataMenu={mainNavConvert} />
