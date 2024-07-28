@@ -7,25 +7,19 @@
   },
   "options": {},
   "attributes": {
-    "name": {
+    "title": {
       "type": "string"
     },
     "url": {
       "type": "string"
     },
-    "description": {
-      "type": "text"
+    "newTab": {
+      "type": "boolean",
+      "default": false
     },
-    "icon": {
-      "type": "media",
-      "multiple": false,
-      "required": false,
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
-      ]
+    "hasDropdown": {
+      "type": "boolean",
+      "default": false
     }
   }
 }

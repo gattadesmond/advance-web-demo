@@ -11,19 +11,21 @@ export default function HeaderNavigation({
   const convertToMenu = (data) => {
     return produce(data, draft => {
       draft.map((item) => {
-        item.subMenu = item.subMenu.data.map((it) => ({
-          id: it.id,
-          title: it.attributes.title,
-          icon: it.attributes.icon,
-          url: it.attributes.url,
-          description: it.attributes.description,
-          newTab: it.attributes.newTab,
-        }))
-
+        if(item.subMenu) {
+          item.subMenu = item.subMenu.data.map((it) => ({
+            id: it.id,
+            title: it.attributes.title,
+            icon: it.attributes.icon,
+            url: it.attributes.url,
+            description: it.attributes.description,
+            newTab: it.attributes.newTab,
+          }))
+        }
       })
     });
   };
   const mainNavConvert = convertToMenu(mainNav);
+  console.log("🚀 ~ mainNavConvert:", mainNavConvert)
   
   return (
     <HeaderNavigationMobase serviceInfo={serviceInfo} dataMenu={mainNavConvert} />

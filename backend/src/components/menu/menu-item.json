@@ -12,7 +12,7 @@
     },
     "hasDropdown": {
       "type": "boolean",
-      "default": false
+      "default": true
     },
     "dropDownCompact": {
       "type": "boolean",

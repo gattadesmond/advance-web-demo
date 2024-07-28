@@ -241,10 +241,10 @@ export interface MenuLink extends Schema.Component {
     description: '';
   };
   attributes: {
-    name: Attribute.String;
+    title: Attribute.String;
     url: Attribute.String;
-    description: Attribute.Text;
-    icon: Attribute.Media;
+    newTab: Attribute.Boolean & Attribute.DefaultTo<false>;
+    hasDropdown: Attribute.Boolean & Attribute.DefaultTo<false>;
   };
 }
 
@@ -270,7 +270,7 @@ export interface MenuMenuItem extends Schema.Component {
   };
   attributes: {
     title: Attribute.String;
-    hasDropdown: Attribute.Boolean & Attribute.DefaultTo<false>;
+    hasDropdown: Attribute.Boolean & Attribute.DefaultTo<true>;
     dropDownCompact: Attribute.Boolean & Attribute.DefaultTo<true>;
     subMenu: Attribute.Relation<
       'menu.menu-item',
