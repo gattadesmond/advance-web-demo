@@ -1,0 +1,27 @@
+{
+  "collectionName": "components_menu_menu_items",
+  "info": {
+    "displayName": "Menu dropdown",
+    "icon": "arrowDown",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "hasDropdown": {
+      "type": "boolean",
+      "default": false
+    },
+    "dropDownCompact": {
+      "type": "boolean",
+      "default": true
+    },
+    "subMenu": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::header-navigation-item.header-navigation-item"
+    }
+  }
+}

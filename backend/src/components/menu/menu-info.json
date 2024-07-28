@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_menu_menu_infos",
+  "info": {
+    "displayName": "Menu info",
+    "icon": "alien"
+  },
+  "options": {},
+  "attributes": {
+    "logo": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "url": {
+      "type": "string"
+    }
+  }
+}

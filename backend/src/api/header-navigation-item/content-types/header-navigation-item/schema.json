@@ -1,0 +1,32 @@
+{
+  "kind": "collectionType",
+  "collectionName": "header_navigation_items",
+  "info": {
+    "singularName": "header-navigation-item",
+    "pluralName": "header-navigation-items",
+    "displayName": "Header Navigation Item"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "icon": {
+      "type": "string"
+    },
+    "url": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
+    },
+    "newTab": {
+      "type": "boolean",
+      "default": false
+    }
+  }
+}

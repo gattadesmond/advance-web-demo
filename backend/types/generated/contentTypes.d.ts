@@ -930,47 +930,16 @@ export interface ApiGlobalGlobal extends Schema.SingleType {
     description: '';
   };
   options: {
-    increments: true;
-    timestamps: true;
     draftAndPublish: false;
   };
-  pluginOptions: {
-    i18n: {
-      localized: true;
-    };
-  };
   attributes: {
-    metadata: Attribute.Component<'meta.metadata'> &
-      Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
-    favicon: Attribute.Media &
-      Attribute.Required &
-      Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
-    notificationBanner: Attribute.Component<'elements.notification-banner'> &
-      Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
-    navbar: Attribute.Component<'layout.navbar'> &
-      Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
-    footer: Attribute.Component<'layout.footer'> &
-      Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
+    metadata: Attribute.Component<'meta.metadata'>;
+    favicon: Attribute.Media & Attribute.Required;
+    notificationBanner: Attribute.Component<'elements.notification-banner'>;
+    navbar: Attribute.Component<'layout.navbar'>;
+    footer: Attribute.Component<'layout.footer'>;
+    headerNav: Attribute.DynamicZone<['menu.menu-item', 'menu.link']>;
+    serviceInfo: Attribute.Component<'menu.menu-info'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
@@ -985,12 +954,41 @@ export interface ApiGlobalGlobal extends Schema.SingleType {
       'admin::user'
     > &
       Attribute.Private;
-    localizations: Attribute.Relation<
-      'api::global.global',
-      'oneToMany',
-      'api::global.global'
-    >;
-    locale: Attribute.String;
+  };
+}
+
+export interface ApiHeaderNavigationItemHeaderNavigationItem
+  extends Schema.CollectionType {
+  collectionName: 'header_navigation_items';
+  info: {
+    singularName: 'header-navigation-item';
+    pluralName: 'header-navigation-items';
+    displayName: 'Header Navigation Item';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Attribute.String & Attribute.Required;
+    icon: Attribute.String;
+    url: Attribute.String;
+    description: Attribute.Text;
+    newTab: Attribute.Boolean & Attribute.DefaultTo<false>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::header-navigation-item.header-navigation-item',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::header-navigation-item.header-navigation-item',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
   };
 }
 
@@ -1144,37 +1142,6 @@ export interface ApiProductFeatureProductFeature extends Schema.CollectionType {
   };
 }
 
-export interface ApiSectionSection extends Schema.CollectionType {
-  collectionName: 'sections';
-  info: {
-    singularName: 'section';
-    pluralName: 'sections';
-    displayName: 'section';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    heading: Attribute.String;
-    links: Attribute.Component<'menu.link', true>;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::section.section',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::section.section',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
 declare module '@strapi/types' {
   export module Shared {
     export interface ContentTypes {
@@ -1197,10 +1164,10 @@ declare module '@strapi/types' {
       'api::author.author': ApiAuthorAuthor;
       'api::category.category': ApiCategoryCategory;
       'api::global.global': ApiGlobalGlobal;
+      'api::header-navigation-item.header-navigation-item': ApiHeaderNavigationItemHeaderNavigationItem;
       'api::lead-form-submission.lead-form-submission': ApiLeadFormSubmissionLeadFormSubmission;
       'api::page.page': ApiPagePage;
       'api::product-feature.product-feature': ApiProductFeatureProductFeature;
-      'api::section.section': ApiSectionSection;
     }
   }
 }

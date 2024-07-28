@@ -236,14 +236,47 @@ export interface LinksSocialLink extends Schema.Component {
 export interface MenuLink extends Schema.Component {
   collectionName: 'components_menu_links';
   info: {
-    displayName: 'link';
+    displayName: 'Menu link';
     icon: 'link';
+    description: '';
   };
   attributes: {
     name: Attribute.String;
     url: Attribute.String;
     description: Attribute.Text;
     icon: Attribute.Media;
+  };
+}
+
+export interface MenuMenuInfo extends Schema.Component {
+  collectionName: 'components_menu_menu_infos';
+  info: {
+    displayName: 'Menu info';
+    icon: 'alien';
+  };
+  attributes: {
+    logo: Attribute.String;
+    name: Attribute.String;
+    url: Attribute.String;
+  };
+}
+
+export interface MenuMenuItem extends Schema.Component {
+  collectionName: 'components_menu_menu_items';
+  info: {
+    displayName: 'Menu dropdown';
+    icon: 'arrowDown';
+    description: '';
+  };
+  attributes: {
+    title: Attribute.String;
+    hasDropdown: Attribute.Boolean & Attribute.DefaultTo<false>;
+    dropDownCompact: Attribute.Boolean & Attribute.DefaultTo<true>;
+    subMenu: Attribute.Relation<
+      'menu.menu-item',
+      'oneToMany',
+      'api::header-navigation-item.header-navigation-item'
+    >;
   };
 }
 
@@ -507,6 +540,8 @@ declare module '@strapi/types' {
       'links.link': LinksLink;
       'links.social-link': LinksSocialLink;
       'menu.link': MenuLink;
+      'menu.menu-info': MenuMenuInfo;
+      'menu.menu-item': MenuMenuItem;
       'meta.metadata': MetaMetadata;
       'sections.bottom-actions': SectionsBottomActions;
       'sections.feature-columns-group': SectionsFeatureColumnsGroup;

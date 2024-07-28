@@ -9,25 +9,15 @@
     "description": ""
   },
   "options": {
-    "increments": true,
-    "timestamps": true,
     "draftAndPublish": false
   },
-  "pluginOptions": {
-    "i18n": {
-      "localized": true
-    }
-  },
+  "pluginOptions": {},
   "attributes": {
     "metadata": {
       "type": "component",
       "repeatable": false,
       "component": "meta.metadata",
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      }
+      "pluginOptions": {}
     },
     "favicon": {
       "type": "media",
@@ -36,41 +26,38 @@
       "allowedTypes": [
         "images"
       ],
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      }
+      "pluginOptions": {}
     },
     "notificationBanner": {
       "type": "component",
       "repeatable": false,
       "component": "elements.notification-banner",
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      }
+      "pluginOptions": {}
     },
     "navbar": {
       "type": "component",
       "repeatable": false,
       "component": "layout.navbar",
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      }
+      "pluginOptions": {}
     },
     "footer": {
       "type": "component",
       "repeatable": false,
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      },
+      "pluginOptions": {},
       "component": "layout.footer"
+    },
+    "headerNav": {
+      "pluginOptions": {},
+      "type": "dynamiczone",
+      "components": [
+        "menu.menu-item",
+        "menu.link"
+      ]
+    },
+    "serviceInfo": {
+      "type": "component",
+      "repeatable": false,
+      "component": "menu.menu-info"
     }
   }
 }

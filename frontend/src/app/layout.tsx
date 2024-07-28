@@ -6,6 +6,7 @@ import { fetchAPI } from "./utils/fetch-api";
 import Banner from "./components/Banner";
 import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
+import HeaderNavigation from "./components/HeaderNavigation";
 import {FALLBACK_SEO} from "@/app/utils/constants";
 
 
@@ -22,6 +23,9 @@ async function getGlobal(): Promise<any> {
       "metadata.shareImage",
       "favicon",
       "notificationBanner.link",
+      "headerNav.title",
+      "headerNav.subMenu",
+      "serviceInfo.name",
       "navbar.links",
       "navbar.navbarLogo.logoImg",
       "footer.footerLogo.logoImg",
@@ -62,7 +66,7 @@ export default async function RootLayout({
   // TODO: CREATE A CUSTOM ERROR PAGE
   if (!global.data) return null;
   
-  const { notificationBanner, navbar, footer } = global.data.attributes;
+  const { notificationBanner, navbar, footer, headerNav, serviceInfo } = global.data.attributes;
 
   const navbarLogoUrl = getStrapiMedia(
     navbar.navbarLogo.logoImg.data?.attributes.url
@@ -75,6 +79,7 @@ export default async function RootLayout({
   return (
     <html lang={params.lang}>
       <body>
+        <HeaderNavigation mainNav={headerNav} serviceInfo={serviceInfo}/>
         <Navbar
           links={navbar.links}
           logoUrl={navbarLogoUrl}
