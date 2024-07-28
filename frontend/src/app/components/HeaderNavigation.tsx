@@ -2,53 +2,30 @@
 
 
 import { HeaderNavigation as HeaderNavigationMobase } from "@momo-webplatform/mobase";
-
+import { produce } from "immer"
 
 export default function HeaderNavigation({
   serviceInfo, mainNav
 }) {
-  console.log("🚀 ~ mainNav:", mainNav)
 
-  const mainNav1 = [
-    {
-      id: 1,
-      title: "Menu 1",
-      hasDropdown: true,
-      dropDownCompact: true,
-      subMenu: [
-        {
-          id: 1,
-          title: "Dịch vụ 1",
-          icon: "https://homepage.momocdn.net/styles/desktop/images/tienich/icon1.svg",
-          url: "/",
-          description: "Mô tả chi tiết dịch vụ 1",
-          newTab: false,
-        },
-        {
-          id: 2,
-          title: "Dịch vụ 2",
-          icon: "https://homepage.momocdn.net/styles/desktop/images/tienich/icon3.svg",
-          url: "/",
-          description: "Mô tả chi tiết dịch vụ 2",
-          newTab: false,
-        },
-      ],
-    },
-    {
-      id: 2,
-      title: "Menu 5",
-      hasDropdown: false,
-      url: "/demo",
-      newTab: false,
-    },
-  ];
+  const convertToMenu = (data) => {
+    return produce(data, draft => {
+      draft.map((item) => {
+        item.subMenu = item.subMenu.data.map((it) => ({
+          id: it.id,
+          title: it.attributes.title,
+          icon: it.attributes.icon,
+          url: it.attributes.url,
+          description: it.attributes.description,
+          newTab: it.attributes.newTab,
+        }))
 
-  const serviceInfo1 = {
-    logo: "https://homepage.momocdn.net/fileuploads/svg/momo-file-221117104714.svg",
-    name: " Tên <br /> Dịch vụ",
-    url: "/demo",
+      })
+    });
   };
+  const mainNavConvert = convertToMenu(mainNav);
+  
   return (
-    <HeaderNavigationMobase serviceInfo={serviceInfo} dataMenu={mainNav1} />
+    <HeaderNavigationMobase serviceInfo={serviceInfo} dataMenu={mainNavConvert} />
   );
 }
