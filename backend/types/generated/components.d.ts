@@ -233,6 +233,20 @@ export interface LinksSocialLink extends Schema.Component {
   };
 }
 
+export interface MenuLink extends Schema.Component {
+  collectionName: 'components_menu_links';
+  info: {
+    displayName: 'link';
+    icon: 'link';
+  };
+  attributes: {
+    name: Attribute.String;
+    url: Attribute.String;
+    description: Attribute.Text;
+    icon: Attribute.Media;
+  };
+}
+
 export interface MetaMetadata extends Schema.Component {
   collectionName: 'components_meta_metadata';
   info: {
@@ -492,6 +506,7 @@ declare module '@strapi/types' {
       'links.button': LinksButton;
       'links.link': LinksLink;
       'links.social-link': LinksSocialLink;
+      'menu.link': MenuLink;
       'meta.metadata': MetaMetadata;
       'sections.bottom-actions': SectionsBottomActions;
       'sections.feature-columns-group': SectionsFeatureColumnsGroup;

@@ -48,7 +48,6 @@ module.exports = (config, { strapi }) => {
     ctx.query = {
       populate,
       filters: { slug: ctx.query.filters.slug },
-      locale: ctx.query.locale,
     };
 
     console.log("page-populate-middleware.js: ctx.query = ", ctx.query);

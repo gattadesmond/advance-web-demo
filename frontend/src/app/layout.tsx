@@ -3,14 +3,13 @@ import "./globals.css";
 import { getStrapiMedia, getStrapiURL } from "./utils/api-helpers";
 import { fetchAPI } from "./utils/fetch-api";
 
-import { i18n } from "../../../i18n-config";
 import Banner from "./components/Banner";
 import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
-import {FALLBACK_SEO} from "@/app/[lang]/utils/constants";
+import {FALLBACK_SEO} from "@/app/utils/constants";
 
 
-async function getGlobal(lang: string): Promise<any> {
+async function getGlobal(): Promise<any> {
   const token = process.env.NEXT_PUBLIC_STRAPI_API_TOKEN;
 
   if (!token) throw new Error("The Strapi API Token environment variable is not set.");
@@ -31,13 +30,12 @@ async function getGlobal(lang: string): Promise<any> {
       "footer.socialLinks",
       "footer.categories",
     ],
-    locale: lang,
   };
   return await fetchAPI(path, urlParamsObject, options);
 }
 
 export async function generateMetadata({ params } : { params: {lang: string}}): Promise<Metadata> {
-  const meta = await getGlobal(params.lang);
+  const meta = await getGlobal();
 
   if (!meta.data) return FALLBACK_SEO;
 
@@ -60,7 +58,7 @@ export default async function RootLayout({
   readonly children: React.ReactNode;
   readonly params: { lang: string };
 }) {
-  const global = await getGlobal(params.lang);
+  const global = await getGlobal();
   // TODO: CREATE A CUSTOM ERROR PAGE
   if (!global.data) return null;
   
@@ -100,8 +98,4 @@ export default async function RootLayout({
       </body>
     </html>
   );
-}
-
-export async function generateStaticParams() {
-  return i18n.locales.map((locale) => ({ lang: locale }));
 }
